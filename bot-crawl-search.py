@@ -7,7 +7,7 @@ consumer_key_secret="8LbwTnshEjRQq0WToQxVCqUIx0Yh8wJUb5oNnKgJSuZeM34z7P"
 auth = tweepy.OAuthHandler(consumer_key,consumer_key_secret)
 api = tweepy.API(auth)
 # Open/create a file to append data to
-csvFile = open('result.csv', 'w', encoding='utf-8')
+csvFile = open('dataset_search.csv', 'w', encoding='utf-8')
 #Use csv writer
 csvWriter = csv.writer(csvFile)
 for tweet in tweepy.Cursor(api.search, q='coding -filter:retweets', tweet_mode='extended',lang="id", since='2021-09-12', until='2021-09-22').items(100):
