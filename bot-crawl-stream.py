@@ -7,8 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1F4YIOQ_wnEp3rCkty4FQZYYOFvD8aUyu
 """
 
-# pip install tweepy
-
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
@@ -30,8 +28,10 @@ class StdOutListener(StreamListener):
         self.num_tweets = 0     # buat variabel inisialisasi jumlah tweet
 
     def on_status(self, status):
-        record = {'TWEET': status.text, 'LINK': 'https://twitter.com/'+str(status.user.screen_name)+'/status/'+str(status.id), 'DATE': status.created_at}       # simpan hasil response kedalam variabel (contoh: ambil text/tweet dan created_at/tanggal tweet)
-        print(record)
+        record = {'TWEET': status.text, 'LINK': 'https://twitter.com/'+str(status.user.screen_name)+'/status/'+str(status.id)}       # simpan hasil response kedalam variabel (contoh: ambil text/tweet dan created_at/tanggal tweet)
+        username = str(status.user.screen_name)
+        if (username == 'joktugfess' or username == 'basejokitugas') :
+          print(record)
         self.num_tweets += 1        # setiap satu tweet yang berhasil didapat dihitung dengan menambahkan satu
         if status.lang == 'in':     # filter tweet yang hanya berbahasa indonesia
           if self.num_tweets < 200:  # batasi jumlah tweet yang dicrawling sebanyak 20
@@ -52,5 +52,6 @@ class StdOutListener(StreamListener):
 
 
 stream = Stream(auth, StdOutListener())
-stream.filter(track=['bantuin bikin logo', 'bantuin bikin poster', 'bantuin bikin banner', 'joki coding', 'tugas coding', 'joki informatika', 'joki pemrograman', 'joki java', 'bantuin java', 'bantuin c++', 'bantuin python', 'tugas python'])   # menggunakan fungsi stream filter untuk mencari kata kunci
-# stream.filter(track=['jokowi'])   # menggunakan fungsi stream filter untuk mencari kata kunci
+# stream.filter(follow=["1330354354780577792"]) # akun twitter untuk di scrape
+stream.filter(track=['joki buat program', 'joki program', 'joki ngoding', 'joki data mining', 'buat flowchart', 'bikin flowchart', 'bantuin bikin logo', 'bantuin bikin poster', 'bantuin bikin banner', 'joki coding', 'tugas coding', 'joki informatika', 'joki pemrograman', 'joki java', 'bantuin java', 'bantuin c++', 'bantuin python', 'tugas python', 'joki python'])   # menggunakan fungsi stream filter untuk mencari kata kunci
+# stream.filter(track=['joktug!'])   # menggunakan fungsi stream filter untuk mencari kata kunci
