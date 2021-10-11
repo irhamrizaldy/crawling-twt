@@ -13,11 +13,17 @@ from tweepy import Stream
 import datetime
 import json, time, sys
 import csv
+import telegram
 
+# API Twitter
 consumer_key = '6qXA2fmtgpN68yQSy3IzLUPs6'
 consumer_secret = '0TEL9W6Eh3Dumx54zAdDWj2lA2i88ookST5jucs0ZOpQmwAb6m'
 access_token = '563053721-yCvEBd3vxKWjxqNeJnQ4dRpMw3nEiPX1kfMbny5r'
 access_token_secret = 'R99YPN00JTRZF7hNEnH9SkjoDJRn4UhGawdibX0cy1RGq'
+
+# API Telegram
+api_key = '2010624549:AAGHEwhPkNtjLMFWjY3BpLtkXytWT8LDrCg'
+user_id = '-1001735202458'
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -28,10 +34,15 @@ class StdOutListener(StreamListener):
         self.num_tweets = 0     # buat variabel inisialisasi jumlah tweet
 
     def on_status(self, status):
-        record = {'TWEET': status.text, 'LINK': 'https://twitter.com/'+str(status.user.screen_name)+'/status/'+str(status.id)}       # simpan hasil response kedalam variabel (contoh: ambil text/tweet dan created_at/tanggal tweet)
+        # record = {'TWEET': status.text, 'LINK': 'https://twitter.com/'+str(status.user.screen_name)+'/status/'+str(status.id)}       # simpan hasil response kedalam variabel (contoh: ambil text/tweet dan created_at/tanggal tweet)
+        tweet = status.text
+        link = 'https://twitter.com/'+str(status.user.screen_name)+'/status/'+str(status.id)
         username = str(status.user.screen_name)
         if (username == 'joktugfess' or username == 'basejokitugas') :
-          print(record)
+            bot = telegram.Bot(token=api_key)
+            record = bot.send_message(chat_id=user_id, text=tweet + " " + link)
+            print(record)
+          
         self.num_tweets += 1        # setiap satu tweet yang berhasil didapat dihitung dengan menambahkan satu
         if status.lang == 'in':     # filter tweet yang hanya berbahasa indonesia
           if self.num_tweets < 200:  # batasi jumlah tweet yang dicrawling sebanyak 20
@@ -54,4 +65,4 @@ class StdOutListener(StreamListener):
 stream = Stream(auth, StdOutListener())
 # stream.filter(follow=["1330354354780577792"]) # akun twitter untuk di scrape
 stream.filter(track=['joki buat program', 'joki program', 'joki ngoding', 'joki data mining', 'buat flowchart', 'bikin flowchart', 'bantuin bikin logo', 'bantuin bikin poster', 'bantuin bikin banner', 'joki coding', 'tugas coding', 'joki informatika', 'joki pemrograman', 'joki java', 'bantuin java', 'bantuin c++', 'bantuin python', 'tugas python', 'joki python'])   # menggunakan fungsi stream filter untuk mencari kata kunci
-# stream.filter(track=['joktug!'])   # menggunakan fungsi stream filter untuk mencari kata kunci
+# stream.filter(track=['joktug!', 'bj!', 'Bj!', 'BJ!'])   # menggunakan fungsi stream filter untuk mencari kata kunci
