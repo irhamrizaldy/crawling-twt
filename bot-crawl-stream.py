@@ -64,5 +64,5 @@ class StdOutListener(StreamListener):
 
 stream = Stream(auth, StdOutListener())
 # stream.filter(follow=["1330354354780577792"]) # akun twitter untuk di scrape
-stream.filter(track=['coding', 'joki web', 'buat web', 'bikin web', 'joki website', 'buat website', 'bikin website', 'joki buat program', 'joki program', 'joki ngoding', 'joki data mining', 'buat flowchart', 'bikin flowchart', 'bantuin bikin logo', 'bantuin bikin poster', 'bantuin bikin banner', 'joki coding', 'tugas coding', 'joki informatika', 'joki pemrograman', 'joki java', 'bantuin java', 'bantuin c++', 'bantuin python', 'tugas python', 'joki python'])   # menggunakan fungsi stream filter untuk mencari kata kunci
+stream.filter(track=['coding', 'web', 'website', 'html', 'HTML', 'php', 'PHP', 'joki buat program', 'joki program', 'joki ngoding', 'joki data mining', 'buat flowchart', 'bikin flowchart', 'bantuin bikin logo', 'bantuin bikin poster', 'bantuin bikin banner', 'joki coding', 'tugas coding', 'joki informatika', 'joki pemrograman', 'joki java', 'bantuin java', 'bantuin c++', 'bantuin python', 'tugas python', 'joki python'])   # menggunakan fungsi stream filter untuk mencari kata kunci
 # stream.filter(track=['joktug!', 'bj!', 'Bj!', 'BJ!'])   # menggunakan fungsi stream filter untuk mencari kata kunci
