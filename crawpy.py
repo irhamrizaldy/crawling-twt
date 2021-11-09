@@ -15,16 +15,16 @@ import csv
 import telegram
 
 # API Twitter
-consumer_key = 'rk2KT9RU8Pq2xsP0EkyfQvppk'
-consumer_secret = 'ZT3r1vCbsME9c0LY4Pj2LxnM2fzgPB93tZEy89wzan4ryIDEjY'
-access_token = '1439979991261802501-L2pwzmBQzgLOACva2eWbUZpKo41Jje'
-access_token_secret = 'SBVhQM8Pt1xpKRIkwZpSYPraNuDWKCPnbTEsy4MNYPsDG'
+consumer_key = 'w1TqY9AwKzDX3OizxCU1pA0v1'
+consumer_secret = 'OT569vsiQlUdoVbx1AyZpnFJddc8M7zweCi6RT4EhRqKAaoKcn'
+access_token = '1439979991261802501-Ac22VOQPgfLD7SpG0hzbP1OBw0F18J'
+access_token_secret = 'l498vnjrA9okLbXUFvd5ey3ZPbNnuCkzxftAUBQtJVsjA'
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
 # API Telegram
-api_key = '2010624549:AAGHEwhPkNtjLMFWjY3BpLtkXytWT8LDrCg'
+api_key = '2010624549:AAGv8qDbYJIMuRPG60SwhOPWbCIDgA7nDuk'
 user_id = '-1001735202458'
 
 class StdOutListener(StreamListener):
@@ -43,11 +43,11 @@ class StdOutListener(StreamListener):
             print(record)
           
         self.num_tweets += 1        # setiap satu tweet yang berhasil didapat dihitung dengan menambahkan satu
-        if status.lang == 'in':     # filter tweet yang hanya berbahasa indonesia
-          if self.num_tweets < 200:  # batasi jumlah tweet yang dicrawling sebanyak 20
-              return True
-          else:
-              return False
+        # if status.lang == 'in':     # filter tweet yang hanya berbahasa indonesia
+        #   if self.num_tweets < 200:  # batasi jumlah tweet yang dicrawling sebanyak 20
+        #       return True
+        #   else:
+        #       return False
 
     def on_error(self, status_code):
         if status_code == 420:
@@ -61,7 +61,7 @@ class StdOutListener(StreamListener):
         print('Stream disconnected; continuing...')
 
 
-stream = Stream(auth, StdOutListener(), wait_on_rate_limit = True)
+stream = Stream(auth, StdOutListener())
 # stream.filter(track=['coding', 'joki web', 'joki website', 'buat web', 'bikin web', 'buat website', 'bikin website', 'joki buat program', 'joki program', 'joki ngoding', 'joki data mining', 'buat flowchart', 'bikin flowchart', 'joki coding', 'tugas coding', 'joki informatika', 'joki pemrograman', 'joki java', 'bantuin java', 'bantuin c++', 'bantuin python', 'tugas python', 'joki python'])   # menggunakan fungsi stream filter untuk mencari kata kunci
 # stream.filter(track=['joktug!', 'Joktug!' 'bj!', 'Bj!', 'bJ!', 'BJ!'])   # menggunakan fungsi stream filter untuk mencari kata kunci
-stream.filter(track=['koding', 'ngoding', 'buat program', 'bikin program', 'joki program', 'buat flowchart', 'bikin flowchart', 'joki informatika', 'informatika', 'joki pemrograman', 'pemrograman dasar', 'joki java', 'bantu java', 'joki python', 'bantu python', 'joki c++', 'bantu c++', 'joki c#', 'bantu c#', 'buat web', 'buat website', 'bikin web', 'bikin website', 'joki php', 'bantu php', 'joki html', 'bantu html'])
+stream.filter(track=['koding', 'ngoding', 'coding', 'buat program', 'bikin program', 'joki program', 'flowchart', 'informatika', 'pemrograman', 'pemrograman dasar', 'java', 'python', 'c++', 'c#', 'buat web', 'buat website', 'bikin web', 'bikin website', 'php', 'PHP', 'html', 'HTML'])
